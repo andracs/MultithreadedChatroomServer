@@ -31,7 +31,7 @@ public class ChatServer {
     public static void main(String[] args) throws Exception {
         System.out.println("The chat server is running...");
         var pool = Executors.newFixedThreadPool(500);
-        try (var listener = new ServerSocket(59001)) {
+        try (var listener = new ServerSocket(59002)) {
             while (true) {
                 pool.execute(new Handler(listener.accept()));
             }
@@ -98,6 +98,7 @@ public class ChatServer {
                         return;
                     }
                     for (PrintWriter writer : writers) {
+                        System.out.println("Besked er kommet fra " + name + ": " + input);
                         writer.println("MESSAGE " + name + ": " + input);
                     }
                 }
